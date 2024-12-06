@@ -46,7 +46,8 @@ public class NoeudTchat {
 			listeEcriture = new Vector<PrintWriter>();
 			
 			//creation et demarrage du thread permettant la connexion d'autres noeuds
-			//TODO
+			Thread threadConnexion = new Thread(new ThreadConnexionTchat(portEcoute, listeEcriture));
+			threadConnexion.start();
 			
 			//connexion aux noeuds (pour creer la liste de "printwriter" a indiquer au thread envoyer messages)				
 			if(listeInfosNoeuds != null) {
@@ -60,15 +61,24 @@ public class NoeudTchat {
 					
 					//connexion au noeud ayant l'adresse IP "adresseNoeud" et le numero de port "portNoeud"
 					//TODO
+					sock = new Socket(adresseNoeud, portNoeud);
+
 
 					//recuperation des flux d'entree et de sortie de la socket creee precedemment pour la connexion
 					//TODO
+					InputStreamReader lecture = new InputStreamReader(sock.getInputStream());
+					BufferedReader lectureMessage = new BufferedReader(lecture);
+					ecriture = new PrintWriter(sock.getOutputStream(), true);
 					
 					//mise a jour de la liste de printwriter
 					//TODO
+						listeEcriture.add(ecriture);
+
 								
 					//creation et demarrage d'un thread reception (pour recuperer les messages venant du noeud)
 					//TODO
+					Thread threadReception=new Thread(new ThreadRecevoirMessage(lectureMessage,sock,ecriture,listeEcriture));
+					threadReception.start();
 					
 					System.out.println("Connecte a " + adresseNoeud + ":" + portNoeud);
 				}
@@ -76,9 +86,14 @@ public class NoeudTchat {
 			
 			// creation et demarrage du thread envoyer messages
 			//TODO
+			Thread threadEnvoie=new Thread(new ThreadEnvoyerMessage(nomUtilisateur,listeEcriture));
+			threadEnvoie.start();
+
 			
 			//attendre la fin d'execution du thread envoyer messages
 			//TODO
+			threadEnvoie.join();
+
 
 			System.exit(0);
 		}
