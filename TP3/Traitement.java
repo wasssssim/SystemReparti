@@ -50,7 +50,7 @@ public class Traitement extends Thread {
 			
 			Random r = new Random();
 			int alea = 0;
-			
+			/* */
 			while(compteur < 3) {
 				/* du code quelconque */
 				alea = 1000 + r.nextInt(9000);

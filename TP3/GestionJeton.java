@@ -104,7 +104,7 @@ public class GestionJeton extends Thread {
 					finsc.acquire();
 				}
 
-				//envoyer le jeton
+				//envoyer le jeton ----- envoi_jeton
 				Thread.sleep(1000); // 1 seconde
 				System.out.println(this.getName()+this.portecoute+" : envoi le jeton a "+this.successeur+" "+this.portsuccesseur);
 				out.println("jeton");

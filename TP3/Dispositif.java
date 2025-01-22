@@ -40,6 +40,6 @@ public class Dispositif {
 		finally {
 			ds.close();
 		}
-	} 
+	} /* */
 
 }
