@@ -54,11 +54,12 @@ public class Traitement extends Thread {
 			while(compteur < 3) {
 				/* du code quelconque */
 				alea = 1000 + r.nextInt(9000);
-				Thread.sleep(alea); // entre 1 et 10 secondes
+				Thread.sleep(1000); // entre 1 et 10 secondes
 				
 				System.out.println(this.getName()+" veut entrer en sc");
 
 				//TODO
+				ProgrammeSite.veutentrer = true;
 				this.debutsc.acquire();
 				
 				System.out.println(this.getName()+" entre en sc");
@@ -77,6 +78,7 @@ public class Traitement extends Thread {
 				
 				System.out.println(this.getName()+" sort de sc");
 				/* fin du code de la section critique  */
+				ProgrammeSite.veutentrer = false;
 				this.finsc.release();
 				
 				/* du code quelconque */

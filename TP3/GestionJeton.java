@@ -90,7 +90,9 @@ public class GestionJeton extends Thread {
 				//recevoir_jeton
 				do{
 					theLine=in.readLine();
-				} while(theLine.equals("jeton")==false);
+
+				}
+				 while(theLine.equals("jeton")==false);
 				System.out.println(this.getName()+this.portecoute+" : a recu le jeton : "+theLine);
 
 				//si veutentrer est vrai alors
